@@ -102,4 +102,5 @@ graph TD
 
 ## Links uteis
 
+- [Figma](https://www.figma.com/design/NCgJEHxTqGU1MJpCV0fXBp/Untitled?node-id=0-1&t=OdHpITJRzjUmeRDt-1) Protótipo de baixa fidelidade
 - [Notion](https://brief-growth-fd4.notion.site/Projeto-final-a06a5a5f64094094bab902bbca05a5ef?pvs=4)
