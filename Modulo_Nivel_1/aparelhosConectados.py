@@ -10,7 +10,7 @@ def obter_ip_roteador():
         saida, erro = proc.communicate()
 
         if erro:
-            print(f"Erro ao executar o comando: {erro.decode('utf-8')}")
+            print(f"Erro ao executar o comando: {erro.decode('utf-8')}") 
             return None
 
         saida = saida.decode('cp437')  # Codificação padrão do Windows
@@ -40,6 +40,30 @@ def pingar_ip(ip):
     # Verificar se o ping foi bem-sucedido
     return resultado.returncode == 0
 
+# Função para obter o nome do dispositivo (hostname) pelo IP
+def obter_nome_dispositivo(ip):
+    try:
+        if platform.system().lower() == "windows":
+            comando = ['nslookup', ip]
+        else:
+            comando = ['arp', '-a', ip]
+
+        resultado = subprocess.run(comando, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        saida = resultado.stdout.decode('utf-8')
+
+        # Extrair o nome da máquina da saída
+        if platform.system().lower() == "windows":
+            match = re.search(r"Name:\s+([^\s]+)", saida)
+        else:
+            match = re.search(r"\(([^)]+)\)", saida)
+
+        if match:
+            return match.group(1)
+        return None
+    except Exception as e:
+        print(f"Erro ao obter o nome do dispositivo para o IP {ip}: {e}")
+        return None
+
 # Função para escanear a rede e encontrar dispositivos conectados
 def escanear_rede(ip_roteador):
     # Definir a faixa de IPs baseada no IP do roteador (assumimos uma máscara de sub-rede /24)
@@ -52,8 +76,9 @@ def escanear_rede(ip_roteador):
     for i in range(1, 255):
         ip = f"{ip_base}.{i}"
         if pingar_ip(ip):
-            print(f"Dispositivo encontrado: {ip}")
-            dispositivos.append(ip)
+            nome_dispositivo = obter_nome_dispositivo(ip) or "Nome desconhecido"
+            print(f"Dispositivo encontrado: {ip} - Nome: {nome_dispositivo}")
+            dispositivos.append((ip, nome_dispositivo))
 
     return dispositivos
 
@@ -71,8 +96,8 @@ def main():
 
     if dispositivos_conectados:
         print("Dispositivos conectados encontrados:")
-        for ip in dispositivos_conectados:
-            print(f"IP: {ip}")
+        for ip, nome in dispositivos_conectados:
+            print(f"IP: {ip} - Nome: {nome}")
     else:
         print("Nenhum dispositivo conectado encontrado.")
 
