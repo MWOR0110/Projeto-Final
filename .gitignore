@@ -1,0 +1,59 @@
+# Arquivos Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+*.log
+*.pot
+*.mo
+*.compiled
+*.so
+*.orig
+
+# Virtualenv
+venv/
+env/
+ENV/
+.venv/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Configurações do Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Arquivos de banco de dados local
+*.sqlite3
+
+# Diretórios relacionados a testes
+.tox/
+.pytest_cache/
+htmlcov/
+.coverage
+.cache/
+
+# Configurações de SO
+.DS_Store
+Thumbs.db
+
+# Arquivos Shell Script
+*.sh~
+*.bak
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+*.orig
+*.save
