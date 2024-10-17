@@ -1,3 +1,0 @@
-Hostname: 
-Password: 
-Score: 500
