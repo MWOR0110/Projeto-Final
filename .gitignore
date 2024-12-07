@@ -21,6 +21,7 @@ venv/
 env/
 ENV/
 .venv/
+.env
 
 # Jupyter Notebooks
 .ipynb_checkpoints/
